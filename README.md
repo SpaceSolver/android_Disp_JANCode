@@ -54,5 +54,5 @@ onStart()などでOnClickListenerの中にて定義するようにする。
   
   [ローカル上のライブラリ追加方法](https://developer.android.com/studio/build/dependencies?hl=ja)  
   [jarを落とせるサイト](https://repo1.maven.org/maven2/)  
-  
+  [関連サイト](https://qiita.com/icchi_h/items/8ce738ce8511ef69c799)
   
