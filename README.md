@@ -43,4 +43,17 @@ onStart()などでOnClickListenerの中にて定義するようにする。
                 }
             }
         });
-    }
+        
+[関連サイトhttps://repo1.maven.org/maven2/](https://develman.net/read-and-write-jancode-with-zxing-java/)        
+
+## Zxingライブラリの関数（writeToStream）を使用して、イメージデータにしたい。
+　writeToStreamは、MatrixToImageConfigクラスに属しているが、
+  com.google.zxing.client.j2seのパッケージのため、依存関係を追加する必要がある。
+  現在、色々やっている最中だが、
+  jarファイルをネットから取得し、ローカル環境にて追加する方法があったので備忘録として
+  残しておく。
+  
+  [ローカル上のライブラリ追加方法](https://developer.android.com/studio/build/dependencies?hl=ja)
+  [jarを落とせるサイト](https://repo1.maven.org/maven2/)
+  
+  
