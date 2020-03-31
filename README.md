@@ -55,9 +55,9 @@ onStart()などでOnClickListenerの中にて定義するようにする。
   残しておく。
   
   ### プロジェクトに追加するには…  
-  ①左上の項目をプロジェクトに変え、libsのフォルダを表示させる。  
-  ②落としてきたjarファイルをlibsにコピー
-  ③build.gradleのdependenciesに
+  ①左上の項目をプロジェクトに変え、libsのフォルダを表示させる。    
+  ②落としてきたjarファイルをlibsにコピー  
+  ③build.gradleのdependenciesに  
   
     implementation fileTree(dir: 'libs', include: ['javase-3.4.0.jar'])
 
