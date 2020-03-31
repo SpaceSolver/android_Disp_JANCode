@@ -1,33 +1,30 @@
 package com.example.android_displyjancode.ui.home;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.widget.Toast;
 
+import com.example.android_displyjancode.MainActivity;
 import com.example.android_displyjancode.R;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.CodaBarWriter;
-import com.google.zxing.oned.Code128Writer;
-import com.google.zxing.oned.ITFWriter;
+import com.google.zxing.oned.EAN13Writer;
+
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 
 public class HomeFragment extends Fragment {
 
@@ -38,14 +35,14 @@ public class HomeFragment extends Fragment {
     int    width      = 400;      //作成するバーコードの幅
     int    height     = 200;      //作成するバーコードの高さ
 
-    // 選択肢
-    private String[] spinnerItems = {"CODABAR", "CODE_128", "ITF"};
-    public TextView SelectItem;
     public View root = null;
+    private Object MatrixToImageWriter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        // ViewModel生成
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        // Acitvityを操作できるようにする
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         return root;
@@ -70,8 +67,7 @@ public class HomeFragment extends Fragment {
                     targetData = editText.getText().toString();
 
                     // バーコード表示処理
-                    pix = DisplayBarcode();
-                    DisplayBitmapImage(pix);
+                    MainActivity.DisplayBarcode(targetData,width,height);
 
                     // バーコード表示を表示状態にする。
                     imageView.setVisibility(View.VISIBLE);
@@ -107,60 +103,33 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-
     }
 
-    public int[] DisplayBarcode()
+    /*
+    public void DisplayBarcode()
     {
         int[] pixels = null;
-        //Spinner spinner = root.findViewById(R.id.SelectFormat);
         try
         {
-            BitMatrix bitMatrix = null;
+            BitMatrix bitData  = null;
 
-            CodaBarWriter writer = new CodaBarWriter();
-            bitMatrix = writer.encode(targetData, BarcodeFormat.CODABAR, width, height);
+            EAN13Writer writer = new EAN13Writer();
 
-            // BitMatrixのデータが「true」の時は「黒」を設定し、「false」の時は「白」を設定する
-            pixels = new int[width * height];
-            for (int y = 0; y < height; y++)
-            {
-                int offset = y * width;
-                for (int x = 0; x < width; x++)
-                {
-                    pixels[offset + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
-                }
-            }
+            //EAN13Writer#encode()には以下の情報を渡す
+            // (1)エンコード対象の文字列、バーコードシンボルに埋め込みたい情報
+            // (2)出力するバーコードの書式
+            // (3)イメージの幅
+            // (4)イメージの高さ
+            bitData  = writer.encode(targetData, BarcodeFormat.EAN_13, width, height);
+            //エンコードで得られたイメージを画像ファイルに出力する
+            FileOutputStream output = new FileOutputStream("mycode.png");
+            MatrixToImageWriter.writeToStream(bitData, "png", output);
+
         }
-        catch (WriterException e)
-        {
-            Log.e("ERROR","例外発生" + e);
-        }
-        return pixels;
-    }
-
-    public void DisplayBitmapImage(int[] pixels)
-    {
-        ImageView imageView = root.findViewById(R.id.imageView);
-        TextView textView = root.findViewById(R.id.NumberDisplayView);
-
-        try {
-            // ビットマップ形式に変換する
-            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-
-            // イメージビューに表示する
-            imageView.setImageBitmap(bitmap);
-
-            // 取得したテキストを TextView に張り付ける
-            textView.setText(targetData);
-        }
-        catch (Exception e)
+        catch (WriterException | FileNotFoundException e)
         {
             Log.e("ERROR","例外発生" + e);
         }
     }
-
-
+     */
 }
