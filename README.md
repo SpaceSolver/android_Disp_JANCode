@@ -67,3 +67,10 @@ onStart()などでOnClickListenerの中にて定義するようにする。
   [jarを落とせるサイト](https://repo1.maven.org/maven2/)  
   [関連サイト](https://qiita.com/icchi_h/items/8ce738ce8511ef69c799)
   
+・依存関係のライブラリは、同じライブラリのパッケージが複数のバージョンを混ぜているとビルドが通らない。
+・ZXINGのライブラリの中で、MatrixToImageConfigクラスはActivityの中でしか使えない。
+　（MatrixToImageConfigがprivateのため）
+・上記の③は、不要だった。
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    が、定義されているため
