@@ -20,6 +20,8 @@ POSシステムや在庫管理システムなどで価格や商品名を検索�
             // (4)イメージの高さ
             bitData  = writer.encode(targetData, BarcodeFormat.EAN_13, width, height);
             
+[関連サイトhttps://repo1.maven.org/maven2/](https://develman.net/read-and-write-jancode-with-zxing-java/)    
+            
 ## fragmentにて実装
 ボタン押下イベントにて、onClickイベントが関数化すると無効状態となる。  
 onStart()などでOnClickListenerの中にて定義するようにする。
@@ -43,7 +45,7 @@ onStart()などでOnClickListenerの中にて定義するようにする。
             }
         });
         
-[関連サイトhttps://repo1.maven.org/maven2/](https://develman.net/read-and-write-jancode-with-zxing-java/)        
+    
 
 ## Zxingライブラリの関数（writeToStream）を使用して、イメージデータにしたい。
 　writeToStreamは、MatrixToImageConfigクラスに属しているが、
