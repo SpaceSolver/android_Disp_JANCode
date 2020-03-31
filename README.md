@@ -5,11 +5,10 @@
 
 JANコードは、EAN-13の別称になる。  
 
---
 日本で最も普及している商品識別コードであり、日本ではJANコードと呼称されています。  
 EAN(JAN)コードから生成されたバーコードシンボルは市販される多くの商品に印刷または貼付されており、  
 POSシステムや在庫管理システムなどで価格や商品名を検索するためのキーとして使われています。  
---  
+  
 実装方法（HomeFragment.java）
 
             EAN13Writer writer = new EAN13Writer();
@@ -53,7 +52,7 @@ onStart()などでOnClickListenerの中にて定義するようにする。
   jarファイルをネットから取得し、ローカル環境にて追加する方法があったので備忘録として
   残しておく。
   
-  [ローカル上のライブラリ追加方法](https://developer.android.com/studio/build/dependencies?hl=ja)
-  [jarを落とせるサイト](https://repo1.maven.org/maven2/)
+  [ローカル上のライブラリ追加方法](https://developer.android.com/studio/build/dependencies?hl=ja)  
+  [jarを落とせるサイト](https://repo1.maven.org/maven2/)  
   
   
