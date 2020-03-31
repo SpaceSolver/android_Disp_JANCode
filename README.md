@@ -54,6 +54,15 @@ onStart()などでOnClickListenerの中にて定義するようにする。
   jarファイルをネットから取得し、ローカル環境にて追加する方法があったので備忘録として
   残しておく。
   
+  ### プロジェクトに追加するには…  
+  ①左上の項目をプロジェクトに変え、libsのフォルダを表示させる。  
+  ②落としてきたjarファイルをlibsにコピー
+  ③build.gradleのdependenciesに
+  
+    implementation fileTree(dir: 'libs', include: ['javase-3.4.0.jar'])
+
+  を追加し、同期を押下
+  
   [ローカル上のライブラリ追加方法](https://developer.android.com/studio/build/dependencies?hl=ja)  
   [jarを落とせるサイト](https://repo1.maven.org/maven2/)  
   [関連サイト](https://qiita.com/icchi_h/items/8ce738ce8511ef69c799)
