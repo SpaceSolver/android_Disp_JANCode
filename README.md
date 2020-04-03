@@ -22,30 +22,6 @@ POSシステムや在庫管理システムなどで価格や商品名を検索�
             
 [関連サイトhttps://repo1.maven.org/maven2/](https://develman.net/read-and-write-jancode-with-zxing-java/)    
             
-## fragmentにて実装
-ボタン押下イベントにて、onClickイベントが関数化すると無効状態となる。  
-onStart()などでOnClickListenerの中にて定義するようにする。
-
-   @Override
-    public void onStart() {
-        super.onStart();
-
-        Button button = (Button)getActivity().findViewById(R.id.AddButton);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                try {
-                ：
-                }
-                catch (Exception e)
-                {
-                    Log.e("ERROR","例外発生" + e);
-                }
-            }
-        });
-        
-    
 
 ## Zxingライブラリの関数（writeToStream）を使用して、イメージデータにしたい。
 　writeToStreamは、MatrixToImageConfigクラスに属しているが、
@@ -74,3 +50,30 @@ onStart()などでOnClickListenerの中にて定義するようにする。
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     が、定義されているため
+
+
+## fragmentでのonClickListener実装の注意点
+ボタン押下イベントの、onClickメソッドを関数化すると呼ばれなくなってしまう。。。
+onStart()などでOnClickListenerの中にて定義するようにする。
+（詳細な機構までは深堀していないが、とにかくこれで動いたのでいったんヨシとする）
+
+   @Override
+    public void onStart() {
+        super.onStart();
+
+        Button button = (Button)getActivity().findViewById(R.id.AddButton);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                try {
+                ：
+                }
+                catch (Exception e)
+                {
+                    Log.e("ERROR","例外発生" + e);
+                }
+            }
+        });
+        
+    
